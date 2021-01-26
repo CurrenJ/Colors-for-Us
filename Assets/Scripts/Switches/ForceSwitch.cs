@@ -7,6 +7,7 @@ public class ForceSwitch : EffectSwitch
 {
     private Vector2 startPosition;
     public Vector2 offset;
+    public bool constant;
 
     override
     public void startSwitch()
@@ -20,13 +21,29 @@ public class ForceSwitch : EffectSwitch
         List<SpriteEffect> list = new List<SpriteEffect>();
         if (enabled)
         {
-            list.Add(new SpriteEffect("yForce", Time.time, time, 0, offset.y, false, consequence));
-            list.Add(new SpriteEffect("xForce", Time.time, time, 0, offset.x, false, null));
+            if (constant)
+            {
+                list.Add(new SpriteEffect("yForce", Time.time, time, offset.y, offset.y, false, consequence));
+                list.Add(new SpriteEffect("xForce", Time.time, time, offset.x, offset.x, false, null));
+            }
+            else
+            {
+                list.Add(new SpriteEffect("yForce", Time.time, time, 0, offset.y, false, consequence));
+                list.Add(new SpriteEffect("xForce", Time.time, time, 0, offset.x, false, null));
+            }
         }
         else
         {
-            list.Add(new SpriteEffect("yForce", Time.time, time, offset.y, 0, false, consequence));
-            list.Add(new SpriteEffect("xForce", Time.time, time, offset.x, 0, false, null));
+            if (constant)
+            {
+                list.Add(new SpriteEffect("yForce", Time.time, time, offset.y, offset.y, false, consequence));
+                list.Add(new SpriteEffect("xForce", Time.time, time, offset.x, offset.x, false, null));
+            }
+            else
+            {
+                list.Add(new SpriteEffect("yForce", Time.time, time, offset.y, 0, false, consequence));
+                list.Add(new SpriteEffect("xForce", Time.time, time, offset.x, 0, false, null));
+            }
         }
         return list;
     }

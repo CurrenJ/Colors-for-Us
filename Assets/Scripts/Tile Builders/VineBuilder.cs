@@ -7,6 +7,7 @@ public class VineBuilder : MonoBehaviour
     public float coverage;
     public Vector2 size;
     public GameObject vines;
+    public ParallaxController parallaxController;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,8 @@ public class VineBuilder : MonoBehaviour
                     v.transform.SetParent(this.transform);
                     v.transform.localPosition = new Vector2(x, y);
                     v.GetComponent<Renderer>().material.SetVector("_Offset", v.transform.localPosition);
+                    if(parallaxController != null)
+                        parallaxController.addGameObject(v, 0);
                 }
             }
         }

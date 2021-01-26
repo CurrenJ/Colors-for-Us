@@ -77,6 +77,9 @@ public class SpriteEffects : MonoBehaviour
                     case ("event"):
                         updateEventInvokation((CustomEventSwitch)_switch, val);
                         break;
+                    case ("volume"):
+                        updateVolume(val);
+                        break;
                     case ("wait"):
                         break;
                 }
@@ -337,6 +340,12 @@ public class SpriteEffects : MonoBehaviour
         Vector3 locRot = transform.localEulerAngles;
         locRot.z = (float)val;
         this.transform.localEulerAngles = locRot;
+    }
+
+    private void updateVolume(double val){
+        foreach(MusicalParticles m in GetComponents<MusicalParticles>()){
+            m.volumeMultiplier = (float)val;
+        }
     }
 
     public static Texture createTexture(Color color) {
